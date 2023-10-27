@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User Registration</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+<!-- Add Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>User Registration</h2>
+    <form method="POST" action="{{ url_for('register') }}">
+        <div class="form-group">
+            <input type="text" name="email" placeholder="Enter email" required>
+        </div>
+        <div class="form-group">
+            <!-- Password field with the eye icon for visibility -->
+            <input type="password" name="password" id="password" placeholder="Enter password" required>
+            <button id="toggle-password" type="button" onclick="togglePasswordVisibility('password')">
+                <i class="far fa-eye" id="eye-icon"></i>
+            </button>
+        </div>
+        <div class="form-group">
+            <!-- Confirm password field with the eye icon for visibility -->
+            <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm password" required>
+            <button id="toggle-confirm-password" type="button" onclick="togglePasswordVisibility('confirm_password')">
+                <i class="far fa-eye" id="confirm-eye-icon"></i>
+            </button>
+        </div>
+        <div class="form-group">
+            <input type="text" name="firstname" placeholder="Enter first name" required>
+        </div>
+        <div class="form-group">
+            <input type="text" name="lastname" placeholder="Enter last name" required>
+        </div>        
+        <!-- Add a div to display the registration success message -->
+        <div class="alert alert-success" id="registration-success" style="display: none;">
+            Successfully created account.
+        </div>
+        <!-- Add a div to display the email exists and password mismatch warning -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul>
+            {% for category, message in messages %}
+            <li class="alert alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <p>Already have an account? <a href="/">Login</a></p>
+    </form>
+</div>
+<!-- JavaScript for password visibility toggle and displaying the success message -->
+<script>
+    function togglePasswordVisibility(fieldId) {
+        var passwordField = document.getElementById(fieldId);
+        var eyeIcon = document.getElementById(fieldId === "password" ? "eye-icon" : "confirm-eye-icon");
+
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList add("fa-eye");
+        }
+    }
+
+    // You can use this JavaScript code to display the success message after registration
+    {% if "account_created" in session %}
+    var registrationSuccess = document.getElementById("registration-success");
+    registrationSuccess.style.display = "block";
+    {% endif %}
+</script>
+</body>
+</html>

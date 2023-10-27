@@ -1,0 +1,40 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>User Account</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">              
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary container-fluid">
+            <a class="navbar-brand" href="#">Deletion</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user_profile') }}">Cancel Deletion</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <h1>Delete Account?</h1>
+        </div>
+        <br>
+        <div class="row">
+            <p>Are you sure you want to delete your account?</p>
+            <form method="POST">
+                <p><button type="submit" class="btn btn-danger">Delete Account</button></p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
